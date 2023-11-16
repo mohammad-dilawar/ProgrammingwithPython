@@ -1,0 +1,16 @@
+# Tasks and their algorithms 
+ This task can be interpreted in two parts. They are described in the text below. 
+ 
+ ## Part 1: Determining the Optimal Ideal Function 
+ In Part 1, the goal is to find the ideal features that best fit the training position among 50 candidates. In total he has 4 different training functions and you have to find the best one for each. A function is a collection of X and Y coordinates, provided  in a CSV file. Of the 50 candidates, the ideal function with the smallest squared error from the training function is defined as the ideal function. This  is essentially a variation of the "mean squared error", a common loss function for optimized models  (Kerzel, 2020). 
+  Squared error has several properties 
+ The deviation is squared, so you always get a positive result 
+ Large deviations have strong effects 
+ Here's a  written description of how the algorithm we implemented in Part 1 works. The implementation itself is in Chapter 5.  For each training function, step through each point and compute the deviation of the y-value from the candidate's ideal function. Square the variances and sum them all up. This value is defined as the squared error. After doing this for all candidate functions, the function with the smallest squared error is the ideal function.  The result is four ideal functions.  ## Part 2: Point Classification 
+ In Part 2, a collection of points is provided  as a .csv file and we need to determine if each point  can be assigned to one of the four ideal functions. Additionally, if they match, the deviation should be calculated. Let me explain again in words how scoring works in our implementation. See Chapter 6 for implementation details. Compute the absolute linear deviation (ald)  for each ideal function for each point in the test data collection. For each deviation, determine whether it is within  tolerance. If there are multiple matches, select the classification with the lowest value. The computation of the tolerance is given within the assignment, and equals to the largest deviation between training- and ideal function multiplied with sqrt(2). 
+ ## Storing of data using SQLite 
+ In addition to the computation, data has to be written towards a SQLite database. Three databases have to be generated.  A database which mirrors the training data set 
+ A database which mirrors the candidate ideal functions data set 
+ A database which stores the classification towards the ideal functions together with the deviation 
+ Ad 3: The assignment did not provide any detail towards what should be saved if no classification can be made. Furthermore, if no classification can be made the deviation cannot be provided for either. If there is no classification, write "-" in the "Ideal Function Number" field and "-1" in the "Delta Y (Test Function)" field. ## Other requirements 
+ There are other requirements within the task that greatly influence the design of the program. First and foremost, you should demonstrate  object-oriented design and use packages such as Panda, Bokeh, and SQLAlchamy. In summary, it should be clear that the point is  not just to compute and solve a task, but to demonstrate knowledge of Python and common packages aimed at data science.
